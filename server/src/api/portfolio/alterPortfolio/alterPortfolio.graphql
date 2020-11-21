@@ -1,0 +1,8 @@
+enum ACTIONS {
+  EDIT
+  DELETE
+}
+
+type Mutation {
+  alterPortfolio(id: ID!, input: PortfolioInput, action: ACTIONS!): Portfolio!
+}

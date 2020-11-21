@@ -1,0 +1,4 @@
+type Query {
+  getPortfolios: [Portfolio]
+  getPortfolio(id: ID!): Portfolio
+}
