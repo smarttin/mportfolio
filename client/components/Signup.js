@@ -12,9 +12,8 @@ const Signup = (props) => {
   const router = useRouter();
 
   const [signUp, { data, loading }] = useMutation(SIGN_UP, {
-    update: (_, __) => router.push('/'),
     onError: (err) => console.log(err.errors),
-    onCompleted: () => console.log('Completed'),
+    onCompleted: () => router.push('/'),
     refetchQueries: [{ query: GET_CURRENT_USER }],
   });
 
@@ -67,7 +66,7 @@ const Signup = (props) => {
                     disabled={loading}
                     className="btn btn-main bg-blue py-2 mr-2 ttu"
                   >
-                    Submit
+                    {loading ? 'Submiting ..' : 'Submit'}
                   </button>
                   <small>
                     Already have an account?{' '}

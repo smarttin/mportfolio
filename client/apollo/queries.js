@@ -1,5 +1,6 @@
 import { gql } from '@apollo/client';
 
+// AUTH QUERIES STARTS
 export const SIGN_UP = gql`
   mutation SignUp($username: String!, $email: String!, $password: String!) {
     signUp(input: { username: $username, email: $email, password: $password }) {
@@ -34,9 +35,9 @@ export const GET_CURRENT_USER = gql`
   }
 `;
 
-// AUTH QUERIES END ----------------------------
+// AUTH QUERIES END
 
-// PORTFOLIO QUERIES START ----------------------------
+// PORTFOLIO QUERIES START
 
 export const CREATE_PORTFOLIO = gql`
   mutation CreatePortfolio(
@@ -107,6 +108,18 @@ export const GET_PORTFOLIOS = gql`
   }
 `;
 
+export const GET_USER_PORTFOLIOS = gql`
+  query GetUserPortfolios {
+    getUserPortfolios {
+      id
+      title
+      jobTitle
+      startDate
+      endDate
+    }
+  }
+`;
+
 export const UPDATE_PORTFOLIO = gql`
   mutation UpdatePortfolio(
     $id: ID
@@ -145,9 +158,49 @@ export const UPDATE_PORTFOLIO = gql`
   }
 `;
 
+export const ALTER_PORTFOLIO = gql`
+  mutation AlterPortfolio(
+    $id: ID!
+    $title: String
+    $company: String
+    $companyWebsite: String
+    $location: String
+    $jobTitle: String
+    $description: String
+    $startDate: String
+    $endDate: String
+    $action: ACTIONS!
+  ) {
+    alterPortfolio(
+      id: $id
+      input: {
+        title: $title
+        company: $company
+        companyWebsite: $companyWebsite
+        location: $location
+        jobTitle: $jobTitle
+        description: $description
+        startDate: $startDate
+        endDate: $endDate
+      }
+      action: $action
+    ) {
+      id
+      title
+      company
+      companyWebsite
+      location
+      jobTitle
+      description
+      startDate
+      endDate
+    }
+  }
+`;
+
 export const DELETE_PORTFOLIO = gql`
   mutation DeletePortfolio($id: ID) {
     deletePortfolio(id: $id)
   }
 `;
-// PORTFOLIO QUERIES ENDS ----------------------------
+// PORTFOLIO QUERIES ENDS

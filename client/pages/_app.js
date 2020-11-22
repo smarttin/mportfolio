@@ -3,7 +3,9 @@ import 'nprogress/nprogress.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../styles/main.scss';
 import dynamic from 'next/dynamic';
-import apolloClient from '../apollo/apolloClient';
+// import { getDataFromTree } from '@apollo/client/react/ssr';
+import App from 'next/app';
+import withApollo from '../apollo/withApollo';
 
 const TopProgressBar = dynamic(
   () => {
@@ -21,4 +23,9 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export default apolloClient(MyApp);
+MyApp.getInitialProps = async (appContext) => {
+  const appProps = await App.getInitialProps(appContext);
+  return { ...appProps };
+};
+
+export default withApollo(MyApp);

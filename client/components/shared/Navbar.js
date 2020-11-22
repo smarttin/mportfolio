@@ -19,9 +19,9 @@ const AppNavbar = ({ className }) => {
 
   const NavDropdownItem = ({ href, title }) => {
     return (
-      <ActiveLink activeClassName="active" href={href}>
+      <Link activeClassName="active" href={href}>
         <a className="dropdown-item">{title}</a>
-      </ActiveLink>
+      </Link>
     );
   };
 
@@ -54,29 +54,35 @@ const AppNavbar = ({ className }) => {
         <Nav>
           {!loading && data && data.me && (
             <>
-              {/* <span className="nav-link">{data.me.username}</span> */}
-              <NavDropdown
-                className="mr-2"
-                title="Manage"
-                id="basic-nav-dropdown"
-              >
-                {data.me.role === 'admin' && (
-                  <NavDropdownItem
-                    href="/portfolios/new"
-                    title="Create Portfolio"
-                  />
-                )}
-                <NavDropdown.Item href="#action/3.2">
-                  Another action
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">
-                  Something
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
-                  Separated link
-                </NavDropdown.Item>
-              </NavDropdown>
+              {/* <span className="nav-link port-navbar-link">
+                {data.me.username}
+              </span> */}
+              {data.me.role === 'admin' && (
+                <NavDropdown
+                  className="mr-2"
+                  title="Manage"
+                  id="basic-nav-dropdown"
+                >
+                  <>
+                    <NavDropdownItem
+                      href="/portfolios/new"
+                      title="Create Portfolio"
+                    />
+                    <NavDropdown.Divider />
+                    <NavDropdownItem
+                      href={{
+                        pathname: '/admin/[id]/dashboard',
+                        query: { id: data.me.id },
+                      }}
+                      as={{
+                        pathname: `/admin/${data.me.id}/dashboard`,
+                        query: { id: data.me.id },
+                      }}
+                      title="Dashboard"
+                    />
+                  </>
+                </NavDropdown>
+              )}
               <Signout />
             </>
           )}

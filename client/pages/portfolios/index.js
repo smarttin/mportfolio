@@ -1,4 +1,4 @@
-import Portfolios from '../../components/portfolio/Portfolios';
+import Portfolios from '@/components/portfolio/Portfolios';
 
 const portfoliosPage = () => {
   return <Portfolios />;

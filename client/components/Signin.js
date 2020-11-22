@@ -12,14 +12,19 @@ const Signin = () => {
   const router = useRouter();
 
   const [signIn, { loading }] = useMutation(SIGN_IN, {
-    update: (_, __) => router.push('/'),
+    // Refetch queries or Update cache
+    // update: (cache, { data: { signIn: signedInUser } }) => {
+    //   cache.writeQuery({
+    //     query: GET_CURRENT_USER,
+    //     data: { me: signedInUser },
+    //   });
+    // },
     onError: (err) => console.log(err.errors),
-    onCompleted: () => console.log('Completed'),
+    onCompleted: () => router.push('/'),
     refetchQueries: [{ query: GET_CURRENT_USER }],
   });
 
   const onSubmit = (formData) => {
-    // console.log(formData);
     signIn({ variables: formData });
   };
 
@@ -57,7 +62,7 @@ const Signin = () => {
                     disabled={loading}
                     className="btn btn-main bg-blue py-2 mr-2 ttu"
                   >
-                    Submit
+                    {loading ? 'Submiting ..' : 'Submit'}
                   </button>
                   <small>
                     Don't have an account?{' '}

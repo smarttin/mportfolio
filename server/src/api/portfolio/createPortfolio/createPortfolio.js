@@ -6,10 +6,14 @@ export default {
     createPortfolio: async (_, { input }, ctx) => {
       try {
         if (!ctx.request.userId)
-          throw AuthenticationError('You must be logged in to do that');
+          throw new AuthenticationError('You must be logged in to do that');
 
         const user = await User.findById(ctx.request.userId);
-
+        if (!user.role === 'admin') {
+          throw new AuthenticationError(
+            'You are not Authorized to perform this action'
+          );
+        }
         const createdPortfolio = await ctx.models.Portfolio.create({
           ...input,
           user: user.id,

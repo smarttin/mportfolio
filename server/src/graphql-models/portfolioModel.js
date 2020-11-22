@@ -11,12 +11,19 @@ class PortfolioModel {
     return this.Model.findById(id);
   }
 
+  getAllByUser(id) {
+    return this.Model.find({ user: id }).sort({ startDate: -1 });
+  }
+
   create(data) {
     return this.Model.create(data);
   }
 
   findAndUpdate(id, data) {
-    return this.Model.findOneAndUpdate({ _id: id }, data, { new: true });
+    return this.Model.findOneAndUpdate({ _id: id }, data, {
+      new: true,
+      runValidators: true,
+    });
   }
 
   findAndDelete(id) {

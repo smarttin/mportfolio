@@ -1,12 +1,12 @@
-import NewPortfolioProject from '../../components/NewPortfolioProject';
-import PleaseSignin from '../../components/PleaseSignin';
+import NewPortfolio from '@/components/portfolio/NewPortfolio';
+import PleaseSignin from '@/components/PleaseSignin';
 
-const NewPortfolioProjectPage = () => {
+const NewPortfolioPage = () => {
   return (
     <PleaseSignin role="admin">
-      <NewPortfolioProject />
+      <NewPortfolio />
     </PleaseSignin>
   );
 };
 
-export default NewPortfolioProjectPage;
+export default NewPortfolioPage;

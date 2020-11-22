@@ -6,8 +6,8 @@ import { useRouter } from 'next/router';
 const Signout = () => {
   const router = useRouter();
   const [signOut] = useMutation(SIGN_OUT, {
-    update: (_, __) => router.push('/'),
     onError: (err) => console.log(err.errors),
+    onCompleted: () => router.push('/'),
     refetchQueries: [{ query: GET_CURRENT_USER }],
   });
   return (
