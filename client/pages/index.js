@@ -16,7 +16,7 @@ const ROLES = [
   'Gatsby.js',
   'Graphql',
   'Rest Api',
-  'Golang - intro',
+  'Golang',
   'MongoDB',
   'PostgreSQL',
 ];

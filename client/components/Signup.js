@@ -27,7 +27,6 @@ const Signup = (props) => {
         <div className="row">
           <div className="col-md-5 mx-auto">
             <h1 className="page-title pt-5">Sign Up</h1>
-            {}
             <form onSubmit={handleSubmit(onSubmit)}>
               <fieldset disabled={loading} aria-busy={loading}>
                 <div className="form-group">

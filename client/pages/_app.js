@@ -1,10 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'nprogress/nprogress.css';
 import 'react-datepicker/dist/react-datepicker.css';
+import 'react-toastify/dist/ReactToastify.css';
 import '../styles/main.scss';
+
 import dynamic from 'next/dynamic';
-// import { getDataFromTree } from '@apollo/client/react/ssr';
 import App from 'next/app';
+import { ToastContainer } from 'react-toastify';
 import withApollo from '../apollo/withApollo';
 
 const TopProgressBar = dynamic(
@@ -19,6 +21,7 @@ function MyApp({ Component, pageProps }) {
     <>
       <TopProgressBar />
       <Component {...pageProps} />
+      <ToastContainer />
     </>
   );
 }

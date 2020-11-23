@@ -79,7 +79,7 @@ export const GET_PORTFOLIO = gql`
   query GetPortfolio($id: ID!) {
     getPortfolio(id: $id) {
       id
-      # daysOfExperience @client
+      daysOfExperience @client
       title
       company
       companyWebsite

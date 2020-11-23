@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import Layout from '../shared/Layout';
 import { ALTER_PORTFOLIO, GET_PORTFOLIO } from '../../apollo/queries';
 import PortfolioForm from './PortfolioForm';
+import { toast } from 'react-toastify';
 
 const EditPortfolio = () => {
   const router = useRouter();
@@ -14,7 +15,6 @@ const EditPortfolio = () => {
     onError: (err) => console.log(err),
     // onCompleted: (res) => console.log('Completed', res),
   });
-  // console.log('initialData', initialData);
 
   const [alterPortfolio, { loading }] = useMutation(ALTER_PORTFOLIO, {
     // update: (cache, { data: { alterPortfolio } }) => console.log('DONE!'),
@@ -23,10 +23,10 @@ const EditPortfolio = () => {
   });
 
   const handleOnSubmit = (formData) => {
-    // return console.log('formData', formData);
     alterPortfolio({
       variables: { id: id, ...formData, action: 'EDIT' },
     });
+    toast.success('Portfolio update succcessful', { autoClose: 2000 });
   };
 
   return (

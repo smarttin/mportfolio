@@ -7,6 +7,7 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import moment from 'moment';
 
 const httpLink = createHttpLink({
   uri: 'http://localhost:4000',
@@ -29,6 +30,19 @@ export default withApollo(
     return new ApolloClient({
       link: httpLink,
       cache: new InMemoryCache().restore(initialState || {}),
+      resolvers: {
+        Portfolio: {
+          daysOfExperience({ startDate, endDate }, args, { cache }) {
+            let now = moment().unix();
+
+            if (endDate) {
+              now = endDate / 1000;
+            }
+
+            return moment.unix(now).diff(moment.unix(startDate / 1000), 'days');
+          },
+        },
+      },
     });
   },
   {

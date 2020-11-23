@@ -2,15 +2,16 @@ import { useForm } from 'react-hook-form';
 import { useMutation } from '@apollo/client';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Layout from './shared/Layout';
 import { SIGN_IN, GET_CURRENT_USER } from '../apollo/queries';
-
+import messages from '../variables/messages';
 const Signin = () => {
+  const disposeId = useRef(null);
   const { register, handleSubmit } = useForm();
   const [errors, setErrors] = useState({});
   const router = useRouter();
-
+  const { message } = router.query;
   const [signIn, { loading }] = useMutation(SIGN_IN, {
     // Refetch queries or Update cache
     // update: (cache, { data: { signIn: signedInUser } }) => {
@@ -24,6 +25,22 @@ const Signin = () => {
     refetchQueries: [{ query: GET_CURRENT_USER }],
   });
 
+  const disposeMessage = () => {
+    router.replace('/signin', '/signin', { shallow: true });
+  };
+
+  useEffect(() => {
+    if (message) {
+      disposeId.current = setTimeout(() => {
+        disposeMessage();
+      }, 3000);
+    }
+
+    return () => {
+      clearTimeout(disposeId.current);
+    };
+  }, [message]);
+
   const onSubmit = (formData) => {
     signIn({ variables: formData });
   };
@@ -34,6 +51,11 @@ const Signin = () => {
         <div className="row">
           <div className="col-md-5 mx-auto">
             <h1 className="page-title pt-5">Sign In</h1>
+            {message && (
+              <div className={`alert alert-${messages[message].status}`}>
+                {messages[message].value}
+              </div>
+            )}
             <form onSubmit={handleSubmit(onSubmit)}>
               <fieldset disabled={loading} aria-busy={loading}>
                 <div className="form-group">

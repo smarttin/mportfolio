@@ -7,18 +7,15 @@ const PleaseSignin = ({ children, role }) => {
   const { loading, error, data } = useQuery(GET_CURRENT_USER, {
     fetchPolicy: 'cache-and-network',
   });
-
-  // if (loading) {
-  //   return <p>Loading . . .</p>;
-  // }
-
+  // const user = (data && data.me) || {};
+  // console.log(user);
   if ((!loading && !data.me) || error) {
-    return <Redirect to="/signin" />;
+    return <Redirect to="/signin" query={{ message: 'NOT_AUTHENTICATED' }} />;
   }
 
   if (data && data.me) {
     if (role && !role.includes(data.me.role)) {
-      return <Redirect to="/signin" />;
+      return <Redirect to="/signin" query={{ message: 'NOT_AUTHORIZED' }} />;
     }
     return children;
   }

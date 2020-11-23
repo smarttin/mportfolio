@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import Layout from '../shared/Layout';
 import { GET_PORTFOLIO } from '../../apollo/queries';
+import { formatDate } from '../../utils/functions';
 
 const PortfolioDetail = () => {
   const router = useRouter();
@@ -39,17 +40,17 @@ const PortfolioDetail = () => {
               <p className="text">{portfolio.location}</p>
 
               <h4 className="title">Start Date</h4>
-              <p className="text">{portfolio.startDate}</p>
+              <p className="text">{formatDate(portfolio.startDate)}</p>
             </div>
 
             <div className="col-lg-6">
-              {/* TODO: days later... */}
               <h4 className="title">Days</h4>
-              {/* <p className="text">{portfolio.daysOfExperience}</p> */}
+              <p className="text">{portfolio.daysOfExperience}</p>
 
               <h4 className="title">End Date</h4>
               <p className="text">
-                {(portfolio.endDate && portfolio.endDate) || 'Present'}
+                {(portfolio.endDate && formatDate(portfolio.endDate)) ||
+                  'Present'}
               </p>
             </div>
             <div className="col-md-12">

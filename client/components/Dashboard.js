@@ -4,6 +4,7 @@ import { Button, Card } from 'react-bootstrap';
 import Link from 'next/link';
 import Layout from './shared/Layout';
 import { ALTER_PORTFOLIO, GET_USER_PORTFOLIOS } from '../apollo/queries';
+import { formatDate } from '../utils/functions';
 
 const Dashboard = () => {
   const router = useRouter();
@@ -44,7 +45,8 @@ const Dashboard = () => {
                 <Card.Body>
                   <Card.Title>{p.title}</Card.Title>
                   <Card.Text>
-                    {p.startDate} - {(p.endDate && p.endDate) || 'Present'}
+                    {formatDate(p.startDate)} -{' '}
+                    {(p.endDate && formatDate(p.endDate)) || 'Present'}
                   </Card.Text>
                   <Link
                     href={{
