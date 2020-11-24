@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
-import config from '../config/dev';
 import fakeDb from './FakeDb';
+import config from '../config';
 
 mongoose.connect(
-  config.DB_URI_LOCAL,
+  config.DB_URI,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,

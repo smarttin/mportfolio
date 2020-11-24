@@ -10,7 +10,7 @@ import { setContext } from '@apollo/client/link/context';
 import moment from 'moment';
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:4000',
+  uri: process.env.BASE_URL,
   credentials: 'include',
 });
 

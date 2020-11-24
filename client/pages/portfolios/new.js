@@ -1,10 +1,10 @@
-import NewPortfolio from '@/components/portfolio/NewPortfolio';
+import CreatePortfolio from '@/components/portfolio/CreatePortfolio';
 import PleaseSignin from '@/components/PleaseSignin';
 
 const NewPortfolioPage = () => {
   return (
     <PleaseSignin role="admin">
-      <NewPortfolio />
+      <CreatePortfolio />
     </PleaseSignin>
   );
 };

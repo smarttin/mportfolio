@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon --exec babel-node src/server.js",
+    "start": "cross-env NODE_ENV=productionnode src/server.js",
     "populate": "nodemon --exec babel-node src/fakedb/populate.js"
   },
   "dependencies": {
@@ -15,6 +16,7 @@
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.2",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "graphql": "^15.4.0",
@@ -22,7 +24,9 @@
     "helmet": "^4.2.0",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
-    "mongoose": "^5.10.14"
+    "mongoose": "^5.10.14",
+    "slugify": "^1.4.6",
+    "unique-slug": "^2.0.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.1",

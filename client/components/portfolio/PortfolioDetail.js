@@ -1,8 +1,8 @@
 import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import Layout from '../shared/Layout';
-import { GET_PORTFOLIO } from '../../apollo/queries';
-import { formatDate } from '../../utils/functions';
+import { GET_PORTFOLIO } from '@/apollo/queries';
+import { formatDetailDate } from '@/utils/functions';
 
 const PortfolioDetail = () => {
   const router = useRouter();
@@ -17,51 +17,34 @@ const PortfolioDetail = () => {
   const portfolio = (data && data.getPortfolio) || {};
 
   return (
-    <Layout>
-      <div className="portfolio-detail">
-        <div className="container">
-          <div className="jumbotron">
-            <h1 className="display-3">{portfolio.title}</h1>
-            <p className="lead">{portfolio.jobTitle}</p>
-            <p>
+    <div className="portfolio-detail">
+      <div className="cover-container d-flex flex-column">
+        <Layout navClass="transparent">
+          <main role="main" className="inner page-cover">
+            <h1 className="cover-heading">{portfolio.title}</h1>
+            <p className="lead dates">
+              {formatDetailDate(portfolio.startDate)} -{' '}
+              {(portfolio.endDate && formatDetailDate(portfolio.endDate)) ||
+                'Present'}
+            </p>
+            <p className="lead info mb-0">
+              {/* add company later */}
+              {portfolio.jobTitle} | company | {portfolio.location}
+            </p>
+            <p className="lead">{portfolio.description}</p>
+            <p className="lead">
               <a
-                className="btn btn-lg btn-success"
-                href={portfolio.companyWebsite}
-                role="button"
+                href="https://google.com"
+                target="_"
+                className="btn btn-lg btn-secondary"
               >
-                See Company
+                View Project
               </a>
             </p>
-          </div>
-
-          <div className="row marketing">
-            <div className="col-lg-6">
-              <h4 className="title">Location</h4>
-              <p className="text">{portfolio.location}</p>
-
-              <h4 className="title">Start Date</h4>
-              <p className="text">{formatDate(portfolio.startDate)}</p>
-            </div>
-
-            <div className="col-lg-6">
-              <h4 className="title">Days</h4>
-              <p className="text">{portfolio.daysOfExperience}</p>
-
-              <h4 className="title">End Date</h4>
-              <p className="text">
-                {(portfolio.endDate && formatDate(portfolio.endDate)) ||
-                  'Present'}
-              </p>
-            </div>
-            <div className="col-md-12">
-              <hr />
-              <h4 className="title">Description</h4>
-              <p>{portfolio.description}</p>
-            </div>
-          </div>
-        </div>
+          </main>
+        </Layout>
       </div>
-    </Layout>
+    </div>
   );
 };
 

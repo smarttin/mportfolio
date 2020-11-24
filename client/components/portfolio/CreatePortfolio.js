@@ -4,7 +4,7 @@ import Layout from '../shared/Layout';
 import { CREATE_PORTFOLIO, GET_PORTFOLIOS } from '../../apollo/queries';
 import PortfolioForm from './PortfolioForm';
 
-const NewPortfolio = () => {
+const CreatePortfolio = () => {
   const router = useRouter();
 
   const [createPortfolio, { loading }] = useMutation(CREATE_PORTFOLIO, {
@@ -37,4 +37,4 @@ const NewPortfolio = () => {
   );
 };
 
-export default NewPortfolio;
+export default CreatePortfolio;

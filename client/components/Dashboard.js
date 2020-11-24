@@ -10,6 +10,7 @@ const Dashboard = () => {
   const router = useRouter();
 
   const { data } = useQuery(GET_USER_PORTFOLIOS, {
+    fetchPolicy: 'cache-and-network',
     onError: (err) => console.log(err),
     onCompleted: () => console.log('Completed'),
   });

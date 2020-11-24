@@ -42,13 +42,13 @@ const AppNavbar = ({ className }) => {
             <NavLink title="about" href="/about" />
           </Nav.Item>
           <Nav.Item className="port-navbar-item">
-            <NavLink title="Portfolio" href="/portfolios" />
+            <NavLink title="Portfolios" href="/portfolios" />
           </Nav.Item>
           <Nav.Item className="port-navbar-item">
             <NavLink title="Blog" href="/blog" />
           </Nav.Item>
           <Nav.Item className="port-navbar-item">
-            <NavLink title="Ask me" href="/askme" />
+            <NavLink title="q&a" href="/forum/categories" />
           </Nav.Item>
         </Nav>
         <Nav>

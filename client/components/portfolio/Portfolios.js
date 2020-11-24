@@ -8,7 +8,7 @@ const Portfolios = () => {
   const { data, loading, error } = useQuery(GET_PORTFOLIOS, {
     fetchPolicy: 'cache-and-network',
     onError: (err) => console.log(err),
-    onCompleted: () => console.log(data),
+    onCompleted: (result) => console.log(result),
   });
 
   const portfolios = (data && data.getPortfolios) || [];
@@ -17,8 +17,8 @@ const Portfolios = () => {
     <Layout>
       <section className="section-title">
         <div className="px-2">
-          <div className="pt-5 pb-4">
-            <h1>Portfolios</h1>
+          <div className="pb-4">
+            <h2>Portfolios</h2>
           </div>
         </div>
       </section>

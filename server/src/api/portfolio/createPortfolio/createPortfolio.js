@@ -6,7 +6,7 @@ export default {
     createPortfolio: async (_, { input }, ctx) => {
       try {
         if (!ctx.request.userId)
-          throw new AuthenticationError('You must be logged in to do that');
+          throw new AuthenticationError('You must sign in to do that');
 
         const user = await User.findById(ctx.request.userId);
         if (!user.role === 'admin') {

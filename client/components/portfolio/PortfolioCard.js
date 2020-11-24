@@ -1,4 +1,4 @@
-import { formatDate } from '@/utils/functions';
+import { formatDetailDate } from '@/utils/functions';
 
 const PortfolioCard = ({ portfolio }) => {
   return (
@@ -10,8 +10,9 @@ const PortfolioCard = ({ portfolio }) => {
       </div>
       <div className="card-footer no-border">
         <small className="text-muted">
-          {formatDate(portfolio.startDate)} -{' '}
-          {(portfolio.endDate && formatDate(portfolio.endDate)) || 'Present'}
+          {formatDetailDate(portfolio.startDate)} -{' '}
+          {(portfolio.endDate && formatDetailDate(portfolio.endDate)) ||
+            'Present'}
         </small>
       </div>
     </div>

@@ -2,6 +2,9 @@
 @import './components/navbar';
 @import './components/home';
 @import './components/portfolioCard';
+@import './components/spinner';
+@import './components/replier';
+@import './components/portfolioDetail';
 
 // Pages
 @import './index.scss';
@@ -10,8 +13,16 @@
 .main-section {
   top: 150px;
   width: 100%;
-  padding: 150px 0 0;
+  padding: 130px 0 0;
 }
+
+.wrapper {
+  min-height: 100vh;
+  min-width: 100vw;
+  margin-top: 0;
+  position: relative;
+}
+
 
 .absolute {
   position: absolute;

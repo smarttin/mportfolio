@@ -1,18 +1,4 @@
-type Portfolio {
-  id: ID!
-  title: String
-  company: String
-  companyWebsite: String
-  location: String
-  jobTitle: String
-  description: String
-  startDate: String
-  endDate: String
-}
-
-type User {
-  id: ID
-  username: String
-  email: String
-  role: String
+type HighlightRes {
+  portfolios: [Portfolio]
+  topics: [Topic]
 }

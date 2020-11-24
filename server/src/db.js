@@ -1,10 +1,14 @@
 import mongoose from 'mongoose';
+import config from './config';
 
 import './models/portfolio';
 import './models/user';
+import './models/forumCategory';
+import './models/topic';
+import './models/post';
 
 mongoose
-  .connect(process.env.DB_URI_LOCAL, {
+  .connect(config.DB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
