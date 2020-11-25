@@ -5,30 +5,33 @@ import {
   ApolloClient,
   InMemoryCache,
   createHttpLink,
+  ApolloLink,
 } from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
 import moment from 'moment';
 
 const httpLink = createHttpLink({
   uri: process.env.BASE_URL,
-  credentials: 'include',
 });
 
-const authLink = setContext((_, { headers }) => {
-  const token = Cookies.get('portfolio_token');
-  console.log(token);
-  return {
+const authLink = new ApolloLink((operation, forward) => {
+  // const token = Cookies.get('portfolio_token');
+  // console.log('token from cookie:', token);
+  operation.setContext(({ headers }) => ({
     headers: {
       ...headers,
-      authorization: `Bearer ${token}`,
+      // authorization: token ? `Bearer ${token}` : '',
     },
-  };
+    fetchOptions: {
+      credentials: 'include',
+    },
+  }));
+  return forward(operation);
 });
 
 export default withApollo(
   ({ initialState }) => {
     return new ApolloClient({
-      link: httpLink,
+      link: authLink.concat(httpLink),
       cache: new InMemoryCache().restore(initialState || {}),
       resolvers: {
         Portfolio: {

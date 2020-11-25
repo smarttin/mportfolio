@@ -18,29 +18,33 @@ const corsOptions = {
   origin: process.env.FRONTEND_URL,
   credentials: true,
 };
-// app.use(cookieParser());
 
-// app.use((req, res, next) => {
-//   const { token } = req.cookies;
-//   if (token) {
-//     const { userID } = jwt.verify(token, process.env.JWT_SECRET);
-//     // console.log(userID);
-//     req.userId = userID;
-//   }
-//   next();
-// });
+app.use(cookieParser());
 
-const getUser = (token) => {
-  const user = jwt.verify(token, process.env.JWT_SECRET);
-  if (!user) {
-    throw new Error('User token not found');
+const getUser = (authHeader) => {
+  const token = authHeader.split(' ')[1];
+  if (token) {
+    try {
+      const user = jwt.verify(token, process.env.JWT_SECRET);
+      return user;
+    } catch (err) {
+      console.log(err);
+    }
   }
-  return user;
 };
 
 const server = new ApolloServer({
   schema,
-  context: contextMiddleware,
+  context: ({ req, res }) => {
+    const authHeader = req.headers.authorization || '';
+    // console.log(authHeader);
+    const user = getUser(authHeader);
+    return {
+      user,
+      res,
+      ...req,
+    };
+  },
 });
 
 server.applyMiddleware({

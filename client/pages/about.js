@@ -16,12 +16,9 @@ const CVModal = () => {
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        <Modal.Body>
-          <iframe
-            style={{ width: '100%', height: '800px' }}
-            src="/jerga_cv.pdf"
-          />
-        </Modal.Body>
+        {/* <Modal.Body> */}
+        <iframe style={{ width: '100%', height: '800px' }} src="/og.pdf" />
+        {/* </Modal.Body> */}
       </Modal>
     </div>
   );

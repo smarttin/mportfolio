@@ -8,6 +8,7 @@ export default {
       if (!ctx.request.userId) {
         return null;
       }
+      // console.log(ctx.request.user, ctx.request.userId);
       const user = await User.findById({ _id: ctx.request.userId });
       return user;
     },

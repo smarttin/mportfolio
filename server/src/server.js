@@ -48,7 +48,7 @@ server.express.use(async (req, res, next) => {
   if (!req.userId) return next();
   const user = await User.findById(req.userId);
   // console.log('user', user);
-  // req.user = user;
+  req.user = user;
   next();
 });
 
