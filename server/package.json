@@ -5,16 +5,20 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon --exec babel-node src/server.js",
-    "start": "cross-env NODE_ENV=productionnode src/server.js",
-    "populate": "nodemon --exec babel-node src/fakedb/populate.js"
+    "populate": "nodemon --exec babel-node src/fakedb/populate.js",
+    "build": "babel src -d build",
+    "postbuild": "cd src && npx copy api/**/*.graphql ../build/api",
+    "start": "cross-env NODE_ENV=production node build/server.js"
   },
   "dependencies": {
+    "@babel/plugin-transform-runtime": "^7.12.1",
     "@graphql-tools/load-files": "^6.2.4",
     "@graphql-tools/merge": "^6.2.5",
     "@graphql-tools/schema": "^7.0.0",
     "apollo-server-express": "^2.19.0",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.5",
+    "copy": "^0.3.2",
     "cors": "^2.8.5",
     "cross-env": "^7.0.2",
     "dotenv": "^8.2.0",

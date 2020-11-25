@@ -1,0 +1,38 @@
+type Portfolio {
+  id: ID!
+  title: String
+  company: String
+  companyWebsite: String
+  location: String
+  jobTitle: String
+  description: String
+  startDate: String
+  endDate: String
+}
+
+input PortfolioInput {
+  title: String
+  company: String
+  companyWebsite: String
+  location: String
+  jobTitle: String
+  description: String
+  startDate: String
+  endDate: String
+}
+
+enum ACTIONS {
+  EDIT
+  DELETE
+}
+
+type Query {
+  getPortfolios: [Portfolio]
+  getPortfolio(id: ID!): Portfolio
+  getUserPortfolios: [Portfolio]
+}
+
+type Mutation {
+  createPortfolio(input: PortfolioInput!): Portfolio!
+  alterPortfolio(id: ID!, input: PortfolioInput, action: ACTIONS!): Portfolio!
+}
